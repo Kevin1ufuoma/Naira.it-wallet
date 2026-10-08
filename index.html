@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Naira.it Mobile Platform</title>
+        <style>
+            /* Modern Smart Mobile Shell Framework (Hardware Optimized) */
+            body {
+                background-color: #020617;
+                color: #f1f5f9;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                width: 100vw;
+                box-sizing: border-box;
+            }
+
+            /* 📱 PHASE 8 METRIC: Premium Hardware Smartphone Frame Body Wrapper */
+            .phone-shell {
+                background-color: #000000;
+                width: 100%;
+                max-width: 390px; /* Exact modern mobile viewport width specification */
+                height: 100vh;
+                max-height: 844px; /* Exact modern aspect ratio height scale */
+                border-radius: 0px;
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+                position: relative;
+                overflow: hidden;
+                border: none;
+                display: flex;
+                flex-direction: column;
+                box-sizing: border-box;
+            }
+
+            /* Desktop Optimization Viewport Layer */
+            @media (min-width: 480px) {
+                .phone-shell {
+                    height: 844px;
+                    border-radius: 3rem;
+                    border: 12px solid #1e293b; /* Premium metallic bezel border chassis */
+                    margin: 2rem 0;
+                }
+                /* Hardware Camera Speaker Top Notch View */
+                .phone-shell::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    width: 110px;
+                    height: 25px;
+                    background-color: #1e293b;
+                    border-bottom-left-radius: 1rem;
+                    border-bottom-right-radius: 1rem;
+                    z-index: 999;
+                }
+            }
+
+            /* Internal App Screen Layout Containers */
+            .app-screen {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                background-color: #0f172a;
+                overflow-y: auto;
+                padding: 2.5rem 1.25rem 1.5rem 1.25rem;
+                position: relative;
+                box-sizing: border-box;
+            }
+
+            /* Structural Graphical Card Text Styling Layouts */
+            .brand { text-align: center; margin-top: 2rem; margin-bottom: 2rem; }
+            .brand h1 { color: #34d399; margin: 0; font-size: 2.5rem; letter-spacing: -0.05em; font-weight: 800; }
+            .brand p { color: #94a3b8; font-size: 0.85rem; margin-top: 0.5rem; }
+            
+            .form-group { margin-bottom: 1.25rem; text-align: left; }
+            .form-group label { display: block; font-size: 0.85rem; color: #cbd5e1; margin-bottom: 0.5rem; font-weight: 600; }
+            .form-group input {
+                width: 100%; padding: 0.85rem 1rem; background-color: #020617; border: 1px solid #334155;
+                border-radius: 0.75rem; color: #f1f5f9; font-size: 1rem; outline: none; box-sizing: border-box;
+            }
+            .form-group input:focus { border-color: #34d399; }
+            
+            .btn {
+                width: 100%; font-weight: 700; padding: 0.85rem; border: none; border-radius: 0.75rem;
+                font-size: 1rem; cursor: pointer; transition: background-color 0.2s; box-sizing: border-box;
+            }
+            .btn-emerald { background-color: #34d399; color: #020617; }
+            .btn-emerald:hover { background-color: #059669; }
+            .btn-slate { background-color: #334155; color: white; margin-top: 0.5rem; }
+            .btn-slate:hover { background-color: #1e293b; }
+            .btn-danger { background-color: #ef4444; color: white; padding: 0.4rem 0.8rem; border-radius: 0.5rem; width: auto; font-size: 0.8rem; font-weight: 600; border: none; cursor: pointer; }
+            .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+            
+            /* Premium Wallet Card Widget Balance Box with Visibility Controller */
+            .wallet-card {
+                background: linear-gradient(135deg, #065f46 0%, #047857 100%);
+                padding: 1.25rem; border-radius: 1rem; border: 1px solid #059669; margin-bottom: 1.25rem; text-align: left;
+                position: relative; box-shadow: 0 10px 15px -3px rgba(4, 120, 87, 0.3);
+            }
+            .wallet-card h3 { margin: 0; font-size: 0.75rem; color: #a7f3d0; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; }
+            .balance-tokens { font-size: 2rem; font-weight: 800; margin: 0.4rem 0 0.2rem 0; color: white; letter-spacing: -0.02em; }
+            .balance-naira { font-size: 1rem; color: #a7f3d0; font-weight: 600; }
+            .visibility-toggle {
+                position: absolute; top: 1.25rem; right: 1.25rem; cursor: pointer; color: #a7f3d0; background: none; border: none; padding: 0; outline: none;
+            }
+            
+            /* 📊 PHASE 7 METRIC: Fractional Investment Grid Cards Layout Assets */
+            .pool-grid { display: flex; flex-direction: column; gap: 0.85rem; margin-bottom: 1.25rem; text-align: left; }
+            .pool-card { background-color: #020617; border: 1px solid #334155; padding: 1rem; border-radius: 0.75rem; box-sizing: border-box; }
+            .pool-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.6rem; }
+            .pool-title { font-weight: 700; color: #34d399; font-size: 0.95rem; }
+            .pool-badge { background-color: #1e3a8a; color: #60a5fa; font-size: 0.7rem; padding: 0.15rem 0.4rem; border-radius: 0.25rem; font-weight: 700; }
+            .pool-meta-row { display: flex; justify-content: space-between; font-size: 0.8rem; color: #cbd5e1; margin-bottom: 0.3rem; }
+            .pool-yield { color: #f59e0b; font-weight: 700; }
+
+            .wire-instruction-box {
+                background-color: #020617; border: 1px solid #334155; padding: 1rem; border-radius: 0.75rem; margin-bottom: 1.25rem; text-align: left;
+            }
+            .wire-instruction-box div { font-size: 0.85rem; margin-bottom: 0.3rem; color: #cbd5e1; }
+            .wire-instruction-box strong { color: #34d399; font-family: monospace; font-size: 0.95rem; }
+
+            /* AI Care Service Chat Windows UI */
+            .chat-box {
+                background-color: #020617; border: 1px solid #334155; border-radius: 0.75rem;
+                height: 200px; overflow-y: auto; padding: 0.85rem; margin-bottom: 1rem; text-align: left; box-sizing: border-box;
+            }
+            .chat-msg { margin-bottom: 0.6rem; font-size: 0.8rem; max-width: 85%; padding: 0.5rem 0.75rem; border-radius: 0.5rem; line-height: 1.35; }
+            .msg-user { background-color: #1e3a8a; color: white; margin-left: auto; text-align: right; }
+            .msg-ai { background-color: #334155; color: #f1f5f9; margin-right: auto; }
+            .msg-triage { background-color: #7f1d1d; color: #fecaca; border: 1px solid #ef4444; margin-right: auto; }
+            
+            /* Layout utility modifiers */
+            .alert-banner {
+                background-color: rgba(239, 68, 68, 0.15); border: 1px solid #ef4444; color: #fecaca;
+                padding: 0.65rem; border-radius: 0.5rem; font-size: 0.8rem; text-align: center; margin-bottom: 1rem; display: none;
+            }
+            .hidden { display: none !important; }
+            .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 1px solid #334155; padding-bottom: 0.75rem; }
+            .tab-grid-three { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.35rem; margin-bottom: 1.25rem; }
+            .tab-btn { background-color: #1e293b; border: none; color: #94a3b8; padding: 0.6rem; font-weight: 700; cursor: pointer; border-radius: 0.5rem; font-size: 0.8rem; outline: none; }
+            .tab-btn.active { background-color: #34d399; color: #020617; }
+        </style>
+    </head>
+
+    <body>
+        <!-- 📱 PHONE FRAME SHELL CONTAINER FRAMEWORK -->
+        <div class="phone-shell">
+            <div class="app-screen">
+                
+                <!-- SCREEN 1: LOGIN PORTAL -->
+                <div id="loginView">
+                    <div class="brand">
+                        <h1>Naira.it</h1>
+                        <p>Secure Fractional Asset & Token Platform</p>
+                    </div>
+                    <div id="errorBanner" class="alert-banner"></div>
+                    <form id="loginForm" onsubmit="handleSecureLogin(event)">
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" id="inputEmail" placeholder="tester@naira.it" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Special Password</label>
+                            <input type="password" id="inputPassword" placeholder="••••••••••••" required>
+                        </div>
+                        <button type="submit" id="submitBtn" class="btn btn-emerald">Unlock Secure Dashboard</button>
+                    </form>
+                </div>
+
+                <!-- SCREEN 2: ACTIVE BANKING CONTROLS INTERFACE -->
+                <div id="dashboardView" class="hidden">
+                    <div class="header-row">
+                        <span id="accountLabel" style="font-size: 0.75rem; color: #94a3b8; font-weight: 600; max-width: 65%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">User Account</span>
+                        <button onclick="handleSecureLogout()" class="btn-danger">Log Out</button>
+                    </div>
+
+                    <!-- Balance Shield Card Block with Eye Graphic Vector -->
+                    <div class="wallet-card">
+                        <h3>Available Balance Room</h3>
+                        <button class="visibility-toggle" onclick="toggleBalanceVisibility()" title="Toggle Balance View">
+                            <svg id="eyeIcon" xmlns="http://w3.org" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                        <div id="displayTokens" class="balance-tokens">0.00 Tokens</div>
+                        <div id="displayNairaWorth" class="balance-naira">Worth: ₦0.00</div>
+                    </div>
+
+                    <!-- Navigation Tabs Grid -->
+                    <div class="tab-grid-three">
+                        <button id="tabWallet" class="tab-btn active" onclick="switchDashboardTab('wallet')">Wallet</button>
+                        <button id="tabInvest" class="tab-btn" onclick="switchDashboardTab('invest')">Invest</button>
+                        <button id="tabSupport" class="tab-btn" onclick="switchDashboardTab('support')">AI Care</button>
+                    </div>
+
+                    <!-- Panel Section A: Wallet Cash Movements Operations -->
+                    <div id="panelWallet">
+                        <div id="walletActionBanner" class="alert-banner" style="background-color: rgba(4, 120, 87, 0.2); border-color: #34d399; color: #a7f3d0;"></div>
+                        <div id="walletErrorBanner" class="alert-banner"></div>
+                        
+                        <div class="wire-instruction-box">
+                            <div style="font-weight: 700; color:#34d399; margin-bottom:0.4rem; text-transform: uppercase; font-size:0.75rem;">Virtual Settlement Details</div>
+                            <div>Bank Name: <strong>Providus Bank</strong></div>
+                            <div>Account No: <strong>9902847162</strong></div>
+                            <div style="font-size:0.7rem; color:#94a3b8; margin-top:0.4rem; line-height:1.25;">Simulate an external bank wire settlement from your banking app by executing below.</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Value Amount (₦ for Wire / Tokens for Payout)</label>
+                            <input type="number" id="inputTxAmount" step="any" placeholder="e.g. 25000 or 2.5">
+                        </div>
+                        
+                        <button onclick="triggerSimulatedWireDeposit()" id="btnDeposit" class="btn btn-emerald">Simulate Wire Settlement (₦)</button>
+                        <button onclick="executeWalletWithdrawal()" id="btnWithdraw" class="btn btn-slate">Queue Wire Payout (Tokens)</button>
+                    </div>
+
+                    <!-- 📊 PANEL SECTION B: FRACTIONAL INVESTMENT POOLS GRID ASSETS -->
+                    <div id="panelInvest" class="hidden">
+                        <div id="investActionBanner" class="alert-banner" style="background-color: rgba(4, 120, 87, 0.2); border-color: #34d399; color: #a7f3d0;"></div>
+                        <div id="investErrorBanner" class="alert-banner"></div>
+                        
+                        <!-- Target project rows render container -->
+                        <div id="investmentPoolsContainer" class="pool-grid"></div>
+
+                        <div class="wire-instruction-box" style="margin-top: 1rem; border-color: #334155;">
+                            <div style="font-weight: 700; color:#cbd5e1; margin-bottom:0.4rem; text-transform: uppercase; font-size:0.7rem;">Allocate Capital Shares</div>
+                            <div class="form-group">
+                                <label>Project Pool ID</label>
+                                <input type="number" id="inputPoolId" placeholder="e.g. 1">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0.6rem;">
+                                <label>Shares (1 Share = 1 Token)</label>
+                                <input type="number" id="inputSharesCount" step="any" placeholder="e.g. 0.5 or 1.5">
+                            </div>
+                            <button onclick="executeAssetAllocationPurchase()" id="btnAllocateAssets" class="btn btn-emerald" style="padding: 0.75rem; font-size: 0.9rem;">Deploy Capital Allocation</button>
+                        </div>
+                    </div>
+
+                    <!-- PANEL SECTION C: AI SUPPORT CHAT CONVERSATION MODULE -->
+                    <div id="panelSupport" class="hidden">
+                        <div id="chatHistoryBox" class="chat-box">
+                            <div class="chat-msg msg-ai">Hello! I am your automated assistant. Ask me anything about using Naira.it or your token valuations!</div>
+                        </div>
+                        <div class="form-group" style="display: flex; gap: 0.35rem; margin-bottom: 0;">
+                            <input type="text" id="inputChatMessage" placeholder="Type prompt/challenge..." style="margin: 0; font-size:0.9rem; padding: 0.65rem 0.85rem;">
+                            <button onclick="submitChatToAI()" id="btnSendChat" class="btn btn-emerald" style="width: auto; padding: 0.65rem 1rem; border-radius: 0.75rem; font-size:0.9rem;">Send</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+            <!-- VANILLA JAVASCRIPT SYSTEM ENGINE (Instant Execution Layout) -->
+        <script>
+            const API_BASE = "http://localhost:8000/api";
+            
+            // Client-side visual state caches
+            let isBalanceHidden = false;
+            let cachedTokensRaw = 0.00;
+            let cachedNairaWorthRaw = "₦0.00";
+
+            // Check for an existing cryptographic session signature on boot
+            window.onload = function() {
+                const token = localStorage.getItem('naira_auth_token');
+                if (token) { showDashboardView(); }
+            };
+
+            // --- 👁️ VISIBILITY EYE TOGGLE MOCK CONTROLLER ---
+            function toggleBalanceVisibility() {
+                isBalanceHidden = !isBalanceHidden;
+                const eyeIcon = document.getElementById('eyeIcon');
+                
+                if (isBalanceHidden) {
+                    // Blur text metrics out with visual secure bullet formats
+                    document.getElementById('displayTokens').innerText = "••••";
+                    document.getElementById('displayNairaWorth').innerText = "Worth: ₦••••";
+                    // Transform eye vector icon slightly to represent locked status
+                    eyeIcon.style.opacity = "0.4";
+                } else {
+                    // Restore hidden numeric memory string variables
+                    document.getElementById('displayTokens').innerText = `${cachedTokensRaw.toFixed(2)} Tokens`;
+                    document.getElementById('displayNairaWorth').innerText = `Worth: ${cachedNairaWorthRaw}`;
+                    eyeIcon.style.opacity = "1";
+                }
+            }
+
+            // --- AUTHENTICATION PIPELINE ---
+            async function handleSecureLogin(event) {
+                event.preventDefault();
+                const email = document.getElementById('inputEmail').value;
+                const password = document.getElementById('inputPassword').value;
+                const submitBtn = document.getElementById('submitBtn');
+                const errorBanner = document.getElementById('errorBanner');
+
+                submitBtn.disabled = true;
+                submitBtn.innerText = "Verifying Signatures...";
+                errorBanner.style.display = "none";
+
+                try {
+                    const response = await fetch(`${API_BASE}/auth/login`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email: email, password: password })
+                    });
+                    const data = await response.json();
+
+                    if (response.ok && data.status === 'success') {
+                        // Lock active authorization signature inside local device memory storage
+                        localStorage.setItem('naira_auth_token', data.access_token);
+                        showDashboardView();
+                    } else {
+                        showError('errorBanner', data.detail || 'Access Denied. Bad Credentials.');
+                    }
+                } catch (error) {
+                    showError('errorBanner', 'Secure network handshake with Python backend failed.');
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "Unlock Secure Dashboard";
+                }
+            }
+
+            // --- DASHBOARD DATA SYNC LOGIC ---
+            async function syncDashboardLedger() {
+                const token = localStorage.getItem('naira_auth_token');
+                if (!token) return handleSecureLogout();
+
+                try {
+                    const response = await fetch(`${API_BASE}/dashboard/secure`, {
+                        method: 'GET',
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    });
+                    const data = await response.json();
+
+                    if (response.ok && data.status === 'success') {
+                        // Update cache values background memory storage fields
+                        cachedTokensRaw = data.available_tokens;
+                        cachedNairaWorthRaw = data.worth_in_naira;
+                        
+                        document.getElementById('accountLabel').innerText = data.secured_account;
+                        
+                        // Render changes onto layout templates ONLY if user hasn't hidden the card view
+                        if (!isBalanceHidden) {
+                            document.getElementById('displayTokens').innerText = `${data.available_tokens.toFixed(2)} Tokens`;
+                            document.getElementById('displayNairaWorth').innerText = `Worth: ${data.worth_in_naira}`;
+                        }
+                    } else if (response.status === 401) {
+                        handleSecureLogout(); // Expired token bounce out
+                    }
+                } catch (error) {
+                    console.error("Ledger synchronization interrupted.");
+                }
+            }
+
+                    // --- FIXED ASYNCHRONOUS WIRE DEPOSIT PIPELINE WEBHOOK SIMULATOR ---
+            async function triggerSimulatedWireDeposit() {
+                // Unpack directly from clean cached local string to prevent innerText string mismatches
+                const currentLoggedInEmail = localStorage.getItem('naira_user_email') || document.getElementById('accountLabel').innerText; 
+                const amountInput = document.getElementById('inputTxAmount');
+                const nairaWiredAmount = parseFloat(amountInput.value);
+                const successBanner = document.getElementById('walletActionBanner');
+                const errorBanner = document.getElementById('walletErrorBanner');
+
+                successBanner.style.display = "none";
+                errorBanner.style.display = "none";
+
+                if (isNaN(nairaWiredAmount) || nairaWiredAmount <= 0) {
+                    showError('walletErrorBanner', "Please enter a valid amount of Naira (₦) to wire transfer.");
+                    return;
+                }
+
+                try {
+                    // FIXED: Formats the transaction payload data structure to match your Python Webhook class keys exactly
+                    const response = await fetch(`${API_BASE}/wallet/webhook/paystack`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            event: "charge.success",
+                            data: {
+                                customer: { email: currentLoggedInEmail },
+                                amount: nairaWiredAmount
+                            }
+                        })
+                    });
+                    const data = await response.json();
+
+                    if (response.ok && data.status === 'success') {
+                        amountInput.value = '';
+                        const tokensCalculated = nairaWiredAmount / 10000.00;
+                        successBanner.innerText = `Bank Wire Received! Providus Bank settled ₦${nairaWiredAmount.toLocaleString()}. Credited +${tokensCalculated.toFixed(4)} Tokens.`;
+                        successBanner.style.display = "block";
+                        
+                        // Force instant dashboard visual balance snap update
+                        await syncDashboardLedger(); 
+                    } else {
+                        showError('walletErrorBanner', data.detail || 'Webhook payload structure rejection.');
+                    }
+                } catch (error) {
+                    showError('walletErrorBanner', "Failed to dispatch bank transfer callback to backend webhook ports.");
+                }
+            }
+
+
+            // --- STABLE SECURED WITHDRAWAL PIPELINE ---
+            async function executeWalletWithdrawal() {
+                const token = localStorage.getItem('naira_auth_token');
+                const amountInput = document.getElementById('inputTxAmount');
+                const tokenAmountToBurn = parseFloat(amountInput.value);
+                const successBanner = document.getElementById('walletActionBanner');
+                const errorBanner = document.getElementById('walletErrorBanner');
+
+                successBanner.style.display = "none";
+                errorBanner.style.display = "none";
+
+                if (isNaN(tokenAmountToBurn) || tokenAmountToBurn <= 0) {
+                    showError('walletErrorBanner', "Please supply a numeric token value to withdraw.");
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`${API_BASE}/wallet/withdraw`, {
+                        method: 'POST',
+                        headers: { 
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ amount: tokenAmountToBurn })
+                    });
+                    const data = await response.json();
+
+                    if (response.ok && data.status === 'success') {
+                        amountInput.value = '';
+                        successBanner.innerText = `Payout Settled! Burned -${tokenAmountToBurn} Tokens. Local bank wire payout dispatched.`;
+                        successBanner.style.display = "block";
+                        await syncDashboardLedger(); // Live refresh metrics column
+                    } else {
+                        showError('walletErrorBanner', data.detail || 'Withdrawal validation rejection.');
+                    }
+                } catch (error) {
+                    showError('walletErrorBanner', "Server connection interrupted during payload burn execution.");
+                }
+            }
+
+                    // --- FIXED AUTOMATED SUPPORT CHAT PIPELINE ---
+            async function submitChatToAI() {
+                const token = localStorage.getItem('naira_auth_token');
+                const chatInput = document.getElementById('inputChatMessage');
+                const message = chatInput.value.trim();
+                const chatBox = document.getElementById('chatHistoryBox');
+                const sendBtn = document.getElementById('btnSendChat');
+
+                if (!message) return;
+
+                // Render active user chat bubble instantly inside the view box
+                appendChatBubble(chatBox, message, 'msg-user');
+                chatInput.value = '';
+                sendBtn.disabled = true;
+
+                try {
+                    const response = await fetch(`${API_BASE}/support/chat`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        // FIX: Maps the key identifier name to match your backend "message" structure exactly
+                        body: JSON.stringify({ message: message }) 
+                    });
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        const bubbleStyle = data.status === 'human_triage' ? 'msg-triage' : 'msg-ai';
+                        appendChatBubble(chatBox, data.message, bubbleStyle);
+                    } else {
+                        appendChatBubble(chatBox, "Communication path dropped. Retry message.", 'msg-triage');
+                    }
+                } catch (error) {
+                    appendChatBubble(chatBox, "Failed to reach live AI channel networks.", 'msg-triage');
+                } finally {
+                    sendBtn.disabled = false;
+                    chatInput.focus();
+                }
+            }
+
+
+            // --- INTERFACE STRUCTURAL DISPLAY UTILITIES ---
+            function showDashboardView() {
+                document.getElementById('loginView').classList.add('hidden');
+                document.getElementById('dashboardView').classList.remove('hidden');
+                syncDashboardLedger();
+                // Automatically poll and check for balance changes every 10 seconds background
+                setInterval(syncDashboardLedger, 10000);
+            }
+
+            function handleSecureLogout() {
+                localStorage.clear();
+                document.getElementById('dashboardView').classList.add('hidden');
+                document.getElementById('loginView').classList.remove('hidden');
+                document.getElementById('inputPassword').value = '';
+            }
+
+            function switchDashboardTab(target) {
+                document.getElementById('tabWallet').classList.toggle('active', target === 'wallet');
+                document.getElementById('tabSupport').classList.toggle('active', target === 'support');
+                document.getElementById('panelWallet').classList.toggle('hidden', target !== 'wallet');
+                document.getElementById('panelSupport').classList.toggle('hidden', target !== 'support');
+            }
+
+            function appendChatBubble(box, text, className) {
+                const div = document.createElement('div');
+                div.className = `chat-msg ${className}`;
+                // Cleans up Markdown new-line representations natively for the web layout text block
+                div.innerText = text.replace(/\\n/g, '\n');
+                box.appendChild(div);
+                box.scrollTop = box.scrollHeight; // Keep chat container scrolled to latest messages
+            }
+
+            // Error message renderer binding mapping logic utilities
+            function showError(elementId, text) {
+                const banner = document.getElementById(elementId);
+                banner.innerText = text;
+                banner.style.display = "block";
+            }
+
+            // 1. Fetch available project pools live from the cloud database via Python API
+            async function fetchLiveInvestmentPools() {
+                try {
+                    const response = await fetch(`${API_BASE}/investments/pools`, {
+                        method: 'GET'
+                    });
+                    const data = await response.json();
+
+                    if (response.ok && data.status === 'success') {
+                        const container = document.getElementById('investmentPoolsContainer');
+                        container.innerHTML = ''; // Wipe formatting placeholders cleanly
+
+                        // Dynamically map list elements right onto individual grid block cards
+                        data.pools.forEach(pool => {
+                            const sharesRemaining = parseFloat(pool.total_shares_available) - parseFloat(pool.shares_funded);
+                            const cardHtml = `
+                                <div class="pool-card">
+                                    <div class="pool-header">
+                                        <span class="pool-title">[ID: ${pool.id}] ${pool.project_name}</span>
+                                        <span class="pool-badge">${pool.category}</span>
+                                    </div>
+                                    <div class="pool-meta-row">
+                                        <span>Target Annual Yield (ROI):</span>
+                                        <span class="pool-yield">${pool.annual_yield_percentage}%</span>
+                                    </div>
+                                    <div class="pool-meta-row">
+                                        <span>Price per Share Unit:</span>
+                                        <strong style="color: #cbd5e1;">1.00 Token (₦10,000.00)</strong>
+                                    </div>
+                                    <div class="pool-meta-row">
+                                        <span>Remaining Capacity:</span>
+                                        <span style="color: #60a5fa; font-weight: 600;">${sharesRemaining.toFixed(2)} / ${pool.total_shares_available} Shares Left</span>
+                                    </div>
+                                </div>
+                            `;
+                            container.innerHTML += cardHtml;
+                        });
+                    }
+                } catch (error) {
+                    console.error("Investment pools asset tracking map synchronization offline.");
+                }
+            }
+
+            // 2. Commit tokens live to secure fractional real estate or agricultural shares
+            async function executeAssetAllocationPurchase() {
+                const token = localStorage.getItem('naira_auth_token');
+                const poolIdInput = document.getElementById('inputPoolId');
+                const sharesInput = document.getElementById('inputSharesCount');
+                
+                const poolId = parseInt(poolIdInput.value);
+                const sharesToBuy = parseFloat(sharesInput.value);
+                
+                const successBanner = document.getElementById('investActionBanner');
+                const errorBanner = document.getElementById('investErrorBanner');
+
+                successBanner.style.display = "none";
+                errorBanner.style.display = "none";
+
+                if (isNaN(poolId) || isNaN(sharesToBuy) || sharesToBuy <= 0) {
+                    showError('investErrorBanner', "Please supply explicit project ID tracking codes and valid positive funding units.");
+                    return;
+                }
+
+                const allocateBtn = document.getElementById('btnAllocateAssets');
+                allocateBtn.disabled = true;
+                allocateBtn.innerText = "Deploying Capital Grid...";
+
+                try {
+                    const response = await fetch(`${API_BASE}/investments/allocate`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ pool_id: poolId, shares_to_buy: sharesToBuy })
+                    });
+                    const data = await response.json();
+
+                    if (response.ok && data.status === 'success') {
+                        poolIdInput.value = '';
+                        sharesInput.value = '';
+                        successBanner.innerText = data.message;
+                        successBanner.style.display = "block";
+                        
+                        // Force complete systemic data sync across both cash files and project tracking assets
+                        await syncDashboardLedger();
+                        await fetchLiveInvestmentPools();
+                    } else {
+                        showError('investErrorBanner', data.detail || 'Asset allocation compilation rejected.');
+                    }
+                } catch (error) {
+                    showError('investErrorBanner', "Handshake payload dispatch lost before reaching server pipelines.");
+                } finally {
+                    allocateBtn.disabled = false;
+                    allocateBtn.innerText = "Commit Tokens & Deploy Capital";
+                }
+            }
+
+
+            // --- AUTOMATED SUPPORT CHAT PIPELINE (PHASE 6 STABLE) ---
+            async function submitChatToAI() {
+                const token = localStorage.getItem('naira_auth_token');
+                const chatInput = document.getElementById('inputChatMessage');
+                const message = chatInput.value.trim();
+                const chatBox = document.getElementById('chatHistoryBox');
+                const sendBtn = document.getElementById('btnSendChat');
+
+                if (!message) return;
+
+                appendChatBubble(chatBox, message, 'msg-user');
+                chatInput.value = '';
+                sendBtn.disabled = true;
+
+                try {
+                    const response = await fetch(`${API_BASE}/support/chat`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ message: message })
+                    });
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        const bubbleStyle = data.status === 'human_triage' ? 'msg-triage' : 'msg-ai';
+                        appendChatBubble(chatBox, data.message, bubbleStyle);
+                    } else {
+                        appendChatBubble(chatBox, "Communication path dropped. Retry message.", 'msg-triage');
+                    }
+                } catch (error) {
+                    appendChatBubble(chatBox, "Failed to reach live AI channel networks.", 'msg-triage');
+                } finally {
+                    sendBtn.disabled = false;
+                    chatInput.focus();
+                }
+            }
+
+            // --- INTERFACE STRUCTURAL UTILITIES ---
+            function showDashboardView() {
+                document.getElementById('loginView').classList.add('hidden');
+                document.getElementById('dashboardView').classList.remove('hidden');
+                syncDashboardLedger();
+                fetchLiveInvestmentPools(); // Synchronize available assets live at initialization
+                setInterval(syncDashboardLedger, 10000); 
+                setInterval(fetchLiveInvestmentPools, 20000); // Background synchronization updates every 20 seconds
+            }
+
+            function handleSecureLogout() {
+                localStorage.clear();
+                document.getElementById('dashboardView').classList.add('hidden');
+                document.getElementById('loginView').classList.remove('hidden');
+                document.getElementById('inputPassword').value = '';
+            }
+
+            // REDESIGNED TAB SWITCHER ROUTER: Supports all 3 operational layout structures flawlessly
+            function switchDashboardTab(target) {
+                document.getElementById('tabWallet').classList.toggle('active', target === 'wallet');
+                document.getElementById('tabInvest').classList.toggle('active', target === 'invest');
+                document.getElementById('tabSupport').classList.toggle('active', target === 'support');
+                
+                document.getElementById('panelWallet').classList.toggle('hidden', target !== 'wallet');
+                document.getElementById('panelInvest').classList.toggle('hidden', target !== 'invest');
+                document.getElementById('panelSupport').classList.toggle('hidden', target !== 'support');
+                
+                if (target === 'invest') {
+                    fetchLiveInvestmentPools(); // Fresh call when tabs click
+                }
+            }
+
+            function appendChatBubble(box, text, className) {
+                const div = document.createElement('div');
+                div.className = `chat-msg ${className}`;
+                div.innerText = text.replace(/\\n/g, '\n');
+                box.appendChild(div);
+                box.scrollTop = box.scrollHeight; 
+            }
+
+            function showError(elementId, text) {
+                const banner = document.getElementById(elementId);
+                banner.innerText = text;
+                banner.style.display = "block";
+            }
+        </script>
+    </body>
+</html>
