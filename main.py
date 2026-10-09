@@ -11,16 +11,20 @@ from google.genai import types
 # Load secret environment configurations from your hidden vault
 load_dotenv()
 
-app = FastAPI()
 
 # 🛡️ UNIFY BROWSER DATA PIPELINES: Clears safety blocks for direct browser folder execution
 from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI()
+
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"]
 )
 
 security_scheme = HTTPBearer()
